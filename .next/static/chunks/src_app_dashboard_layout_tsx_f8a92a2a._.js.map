@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///C:/fine/src/app/dashboard/layout.tsx"],"sourcesContent":["\"use client\";\r\n\r\nexport default function DashboardLayout({\r\n  children,\r\n}: {\r\n  children: React.ReactNode;\r\n}) {\r\n  return (\r\n    <div>\r\n      <SidebarProvider>\r\n        <div>\r\n          <AppSidebar />\r\n          <main>{children}</main>\r\n        </div>\r\n      </SidebarProvider>\r\n    </div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;AAAA;;AAEe,SAAS,gBAAgB,EACtC,QAAQ,EAGT;IACC,qBACE,6LAAC;kBACC,cAAA,6LAAC;sBACC,cAAA,6LAAC;;kCACC,6LAAC;;;;;kCACD,6LAAC;kCAAM;;;;;;;;;;;;;;;;;;;;;;AAKjB;KAfwB","debugId":null}}]
+}

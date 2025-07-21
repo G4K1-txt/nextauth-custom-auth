@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 188, "column": 0}, "map": {"version":3,"sources":["file:///C:/fine/src/lib/sendEmail.ts"],"sourcesContent":["import nodemailer from \"nodemailer\"\r\n\r\nexport async function sendMail({ to, subject, html }: { to: string; subject: string; html: string }) {\r\n  try {\r\n    const transporter = nodemailer.createTransport({\r\n      host: process.env.SMTP_HOST,\r\n      port: 587,\r\n      secure: false,\r\n      auth: {\r\n        user: process.env.SMTP_USER,\r\n        pass: process.env.SMTP_PASS,\r\n      },\r\n    });\r\n\r\n    const info = await transporter.sendMail({\r\n      from: `\"Seu App\" <${process.env.SMTP_USER}>`,\r\n      to,\r\n      subject,\r\n      html,\r\n    });\r\n\r\n    console.log('Email enviado:', info.messageId);\r\n  } catch (error) {\r\n    console.error('Erro no sendMail():');\r\n    throw error; \r\n  }\r\n}\r\n\r\n"],"names":[],"mappings":";;;AAAA;;AAEO,eAAe,SAAS,EAAE,EAAE,EAAE,OAAO,EAAE,IAAI,EAAiD;IACjG,IAAI;QACF,MAAM,cAAc,iJAAA,CAAA,UAAU,CAAC,eAAe,CAAC;YAC7C,MAAM,QAAQ,GAAG,CAAC,SAAS;YAC3B,MAAM;YACN,QAAQ;YACR,MAAM;gBACJ,MAAM,QAAQ,GAAG,CAAC,SAAS;gBAC3B,MAAM,QAAQ,GAAG,CAAC,SAAS;YAC7B;QACF;QAEA,MAAM,OAAO,MAAM,YAAY,QAAQ,CAAC;YACtC,MAAM,CAAC,WAAW,EAAE,QAAQ,GAAG,CAAC,SAAS,CAAC,CAAC,CAAC;YAC5C;YACA;YACA;QACF;QAEA,QAAQ,GAAG,CAAC,kBAAkB,KAAK,SAAS;IAC9C,EAAE,OAAO,OAAO;QACd,QAAQ,KAAK,CAAC;QACd,MAAM;IACR;AACF","debugId":null}}]
+}

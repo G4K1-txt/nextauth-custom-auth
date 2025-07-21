@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 96, "column": 0}, "map": {"version":3,"sources":["file:///C:/fine/src/app/perfil/page.tsx"],"sourcesContent":["//import { SidebarProvider, SidebarTrigger } from \"@/components/ui/sidebar\"\r\n//import { AppSidebar } from \"@/components/_sidebar/app-sidebar\"\r\nimport { getServerSession } from \"next-auth\";\r\nimport { authOptions } from \"../api/auth/[...nextauth]/route\";\r\nimport { redirect } from \"next/navigation\";\r\n\r\n\r\nexport default async function PerfilPage(){\r\n    const session = await getServerSession(authOptions);\r\n\r\n  if (!session) {\r\n    redirect(\"/login\");\r\n  }\r\n    return(\r\n        <div className=\"p-8\">\r\n            <h1 className=\"text-2xl font-bold\">Perfil</h1>\r\n            <p>Bem-vindo, {session.user?.name || session.user?.email}</p>\r\n    </div>\r\n    )\r\n}"],"names":[],"mappings":"AAAA,2EAA2E;AAC3E,gEAAgE;;;;;AAChE;;;;;;AAEA;AAAA;;;;;AAGe,eAAe;IAC1B,MAAM,UAAU,MAAM,CAAA,GAAA,qIAAA,CAAA,mBAAgB,AAAD,EAAE;IAEzC,IAAI,CAAC,SAAS;QACZ,CAAA,GAAA,qLAAA,CAAA,WAAQ,AAAD,EAAE;IACX;IACE,qBACI,8OAAC;QAAI,WAAU;;0BACX,8OAAC;gBAAG,WAAU;0BAAqB;;;;;;0BACnC,8OAAC;;oBAAE;oBAAY,QAAQ,IAAI,EAAE,QAAQ,QAAQ,IAAI,EAAE;;;;;;;;;;;;;AAG/D","debugId":null}}]
+}
