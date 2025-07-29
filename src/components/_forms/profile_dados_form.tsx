@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import { formatCpf, formatContato } from "@/lib/mascaras";
 import { fetchCepData } from "@/lib/buscaCep";
 import { DadosPerfilFormProps, DadosPerfilFormHandle } from "@/types/forms";
-
+import { toast } from 'sonner';
 
 
 export const DadosPerfilForm = forwardRef<
@@ -95,11 +95,11 @@ export const DadosPerfilForm = forwardRef<
           );
         }
 
-        const updatedUser = await res.json();
-        console.log("Usuário atualizado com sucesso:", updatedUser);
+        //const updatedUser = await res.json();
+        toast.success('Usuario atualizado com sucesso!')
         onSaveSuccess?.();
       } catch (error) {
-        console.error("Erro ao salvar dados do usuário:", error);
+        toast.error("Erro ao salvar dados do usuário: " + error);
       } finally {
       }
     },

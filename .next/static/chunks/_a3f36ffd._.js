@@ -382,9 +382,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$s
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next-auth/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$mascaras$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/mascaras.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$buscaCep$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/buscaCep.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sonner/dist/index.mjs [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -480,11 +482,11 @@ const DadosPerfilForm = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$
                                 const errorData = await res.text();
                                 throw new Error(`Erro ao salvar dados: ${errorData || res.statusText}`);
                             }
-                            const updatedUser = await res.json();
-                            console.log("Usuário atualizado com sucesso:", updatedUser);
+                            //const updatedUser = await res.json();
+                            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success('Usuario atualizado com sucesso!');
                             onSaveSuccess?.();
                         } catch (error) {
-                            console.error("Erro ao salvar dados do usuário:", error);
+                            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Erro ao salvar dados do usuário: " + error);
                         } finally{}
                     }
                 })["DadosPerfilForm.useImperativeHandle"]
@@ -837,18 +839,20 @@ function PerfilPage() {
     const { data: session, status } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSession"])();
     const [editando, setEditando] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const formRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const [avatarUrl, setAvatarUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(session?.user?.image ?? undefined);
+    const fileInputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     if (status === "loading") return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
         children: "Carregando..."
     }, void 0, false, {
         fileName: "[project]/src/components/_forms/profile-form.tsx",
-        lineNumber: 17,
+        lineNumber: 22,
         columnNumber: 36
     }, this);
     if (!session) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
         children: "Usuário não logado"
     }, void 0, false, {
         fileName: "[project]/src/components/_forms/profile-form.tsx",
-        lineNumber: 18,
+        lineNumber: 23,
         columnNumber: 24
     }, this);
     const handleSaveClick = async ()=>{
@@ -861,11 +865,34 @@ function PerfilPage() {
             }
         }
     };
-    const handleEditClick = ()=>{
-        setEditando(true);
+    const handleEditClick = ()=>setEditando(true);
+    const handleFormSaveSuccess = ()=>setEditando(false);
+    // Função para abrir o seletor de arquivo ao clicar no Avatar
+    const handleAvatarClick = ()=>{
+        if (fileInputRef.current) fileInputRef.current.click();
     };
-    const handleFormSaveSuccess = ()=>{
-        setEditando(false);
+    // Função para lidar com o upload e preview
+    const handleFileChange = async (e)=>{
+        const file = e.target.files?.[0];
+        if (!file) return;
+        // Preview local
+        const reader = new FileReader();
+        reader.onload = (ev)=>{
+            setAvatarUrl(ev.target?.result);
+        };
+        reader.readAsDataURL(file);
+        // Upload para o backend
+        const formData = new FormData();
+        formData.append("file", file);
+        const res = await fetch("/api/user/upload", {
+            method: "POST",
+            body: formData
+        });
+        const data = await res.json();
+        if (data?.data?.secure_url) {
+            setAvatarUrl(data.data.secure_url);
+        // Aqui você pode salvar a URL no perfil do usuário, se desejar
+        }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "px-7",
@@ -875,7 +902,7 @@ function PerfilPage() {
                 children: "Perfil"
             }, void 0, false, {
                 fileName: "[project]/src/components/_forms/profile-form.tsx",
-                lineNumber: 41,
+                lineNumber: 74,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -892,50 +919,85 @@ function PerfilPage() {
                                         children: session.user?.name
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                        lineNumber: 49,
+                                        lineNumber: 82,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                    lineNumber: 48,
+                                    lineNumber: 81,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                lineNumber: 47,
+                                lineNumber: 80,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
                                 className: "flex justify-center items-center text-center",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Avatar"], {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AvatarImage"], {}, void 0, false, {
-                                            fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                            lineNumber: 56,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AvatarFallback"], {
-                                            children: "Profile"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                            lineNumber: 57,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                    lineNumber: 55,
-                                    columnNumber: 13
-                                }, this)
-                            }, void 0, false, {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        type: "file",
+                                        accept: "image/*",
+                                        ref: fileInputRef,
+                                        style: {
+                                            display: "none"
+                                        },
+                                        onChange: handleFileChange
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/_forms/profile-form.tsx",
+                                        lineNumber: 88,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        onClick: handleAvatarClick,
+                                        style: {
+                                            cursor: "pointer"
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Avatar"], {
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AvatarImage"], {}, void 0, false, {
+                                                        fileName: "[project]/src/components/_forms/profile-form.tsx",
+                                                        lineNumber: 97,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AvatarFallback"], {
+                                                        children: "Profile"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/_forms/profile-form.tsx",
+                                                        lineNumber: 98,
+                                                        columnNumber: 17
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/components/_forms/profile-form.tsx",
+                                                lineNumber: 96,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-xs text-gray-500 mt-2 block",
+                                                children: "Clique aqui para carregar a imagem"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/_forms/profile-form.tsx",
+                                                lineNumber: 100,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/_forms/profile-form.tsx",
+                                        lineNumber: 95,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                lineNumber: 54,
+                                lineNumber: 87,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/_forms/profile-form.tsx",
-                        lineNumber: 46,
+                        lineNumber: 79,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -952,7 +1014,7 @@ function PerfilPage() {
                                                     children: "Seus Dados"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                                    lineNumber: 67,
+                                                    lineNumber: 110,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -961,42 +1023,42 @@ function PerfilPage() {
                                                         onClick: handleEditClick
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                                        lineNumber: 72,
+                                                        lineNumber: 115,
                                                         columnNumber: 21
                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$_button$2f$iconButtonSalvar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ButtonIconSalvar"], {
                                                         onClick: handleSaveClick
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                                        lineNumber: 74,
+                                                        lineNumber: 117,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                                    lineNumber: 70,
+                                                    lineNumber: 113,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                            lineNumber: 66,
+                                            lineNumber: 109,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$separator$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Separator"], {
                                             className: "mt-4"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                            lineNumber: 78,
+                                            lineNumber: 121,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                    lineNumber: 65,
+                                    lineNumber: 108,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                lineNumber: 64,
+                                lineNumber: 107,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -1006,18 +1068,18 @@ function PerfilPage() {
                                     onSaveSuccess: handleFormSaveSuccess
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                    lineNumber: 82,
+                                    lineNumber: 125,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                lineNumber: 81,
+                                lineNumber: 124,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/_forms/profile-form.tsx",
-                        lineNumber: 63,
+                        lineNumber: 106,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -1027,31 +1089,31 @@ function PerfilPage() {
                                 className: "flex justify-center items-center text-center",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardTitle"], {}, void 0, false, {
                                     fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                    lineNumber: 93,
+                                    lineNumber: 136,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                lineNumber: 92,
+                                lineNumber: 135,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
                                 className: "flex justify-center items-center text-center"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                lineNumber: 95,
+                                lineNumber: 138,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/_forms/profile-form.tsx",
-                        lineNumber: 91,
+                        lineNumber: 134,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/_forms/profile-form.tsx",
-                lineNumber: 44,
+                lineNumber: 77,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1063,40 +1125,40 @@ function PerfilPage() {
                             className: "flex justify-center items-center text-center",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardTitle"], {}, void 0, false, {
                                 fileName: "[project]/src/components/_forms/profile-form.tsx",
-                                lineNumber: 103,
+                                lineNumber: 146,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/_forms/profile-form.tsx",
-                            lineNumber: 102,
+                            lineNumber: 145,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
                             className: "flex justify-center items-center text-center"
                         }, void 0, false, {
                             fileName: "[project]/src/components/_forms/profile-form.tsx",
-                            lineNumber: 105,
+                            lineNumber: 148,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/_forms/profile-form.tsx",
-                    lineNumber: 101,
+                    lineNumber: 144,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/_forms/profile-form.tsx",
-                lineNumber: 100,
+                lineNumber: 143,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/_forms/profile-form.tsx",
-        lineNumber: 40,
+        lineNumber: 73,
         columnNumber: 5
     }, this);
 }
-_s(PerfilPage, "YeYw03Lot1F9w/Y/YcW4U99kGKU=", false, function() {
+_s(PerfilPage, "1curLbQtwqrb7qEa3fKd55kSW8U=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSession"]
     ];

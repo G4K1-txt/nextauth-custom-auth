@@ -13,26 +13,21 @@ export default function DashboardPage() {
   if (!session) return <p>Usuário não logado</p>;
 
   return (
-    <div>
-      <SidebarProvider>
-        <div>
-          <AppSidebar />
+    <SidebarProvider>
+      <div className="flex overflow-hidden min-h-screen">
+        <AppSidebar />
+        <div className="flex flex-col flex-1">
+          <h1 className="py-4 pl-2 text-4xl font-bold tracking-tight text-balance">Dashboard</h1>
+          <main className="flex justify-center flex-1">
+            <div className="flex pt-10 gap-2">
+              <CardDashboard />
+              <CardDashboard />
+              <CardDashboard />
+              <CardDashboard />
+            </div>
+          </main>
         </div>
-        <div className="flex overflow-hidden">
-          <div>
-            <h1 className="py-4 pl-2 text-4xl font-bold tracking-tight text-balance">Dashboard</h1>
-            <main className="flex justify-center h-screen w-screen">
-              <div className="flex pt-10 gap-2">
-                <CardDashboard />
-                <CardDashboard />
-                <CardDashboard />
-                <CardDashboard />
-              </div>
-            </main>
-          </div>
-        </div>
-      </SidebarProvider>
-      <div className=" justify-center"></div>
-    </div>
+      </div>
+    </SidebarProvider>
   );
 }

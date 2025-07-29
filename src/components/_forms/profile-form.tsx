@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { ButtonIconEditar } from "../_button/iconButtonEditar";
 import { ButtonIconSalvar } from "../_button/iconButtonSalvar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { DadosPerfilFormHandle } from "@/types/forms";
 import { DadosPerfilForm } from "@/components/_forms/profile_dados_form";
@@ -28,83 +27,53 @@ export function PerfilPage() {
     }
   };
 
-  const handleEditClick = () => {
-    setEditando(true);
-  };
+  const handleEditClick = () => setEditando(true);
 
-  const handleFormSaveSuccess = () => {
-    setEditando(false);
-  };
+  const handleFormSaveSuccess = () => setEditando(false);    
 
-  return (
-    <div className="px-7">
-      <h1 className="py-4 text-4xl font-bold tracking-tight text-balance">
-        Perfil
-      </h1>
-      <div className="flex flex-wrap justify-center gap-4">
-        {/* Card do avatar */}
-        <Card className="w-full sm:w-[470px] max-w-full h-[420px]">
-          <CardHeader className="flex justify-center items-center text-center">
-            <CardTitle>
-              <h3 className=" text-2xl font-semibold tracking-tight">
+return (
+  <div className="px-4">
+    <h1 className="py-4 text-3xl sm:text-4xl font-bold tracking-tight text-balance">
+      Perfil
+    </h1>
+
+    <div className="flex justify-center">
+      <Card className="w-full h-auto mx-auto">
+        <CardHeader>
+          <CardTitle>
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight">
                 {session.user?.name}
               </h3>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex justify-center items-center text-center">
-            <Avatar>
-              <AvatarImage />
-              <AvatarFallback>Profile</AvatarFallback>
-            </Avatar>
-          </CardContent>
-        </Card>
-
-        {/* Card dos dados */}
-        <Card className="w-full sm:w-[700px] max-w-full h-[420px]">
-          <CardHeader>
-            <CardTitle>
-              <div className="flex items-center justify-between flex-wrap gap-2">
-                <h3 className="text-2xl font-semibold tracking-tight">
-                  Seus Dados
-                </h3>
-                <div className="flex gap-3">
-                  {!editando ? (
-                    <ButtonIconEditar onClick={handleEditClick} />
-                  ) : (
-                    <ButtonIconSalvar onClick={handleSaveClick} />
-                  )}
-                </div>
+              <div className="flex gap-3">
+                {!editando ? (
+                  <ButtonIconEditar onClick={handleEditClick} />
+                ) : (
+                  <ButtonIconSalvar onClick={handleSaveClick} />
+                )}
               </div>
-              <Separator className="mt-4" />
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <DadosPerfilForm
-              ref={formRef}
-              editando={editando}
-              onSaveSuccess={handleFormSaveSuccess}
-            />
-          </CardContent>
-        </Card>
-
-        {/* Card vazio (pode ocultar em mobile se quiser) */}
-        <Card className="w-full sm:w-[470px] max-w-full h-[420px] hidden lg:block">
-          <CardHeader className="flex justify-center items-center text-center">
-            <CardTitle></CardTitle>
-          </CardHeader>
-          <CardContent className="flex justify-center items-center text-center"></CardContent>
-        </Card>
-      </div>
-
-      {/* Card inferior */}
-      <div className="mt-3">
-        <Card className="w-full max-w-full h-[360px]">
-          <CardHeader className="flex justify-center items-center text-center">
-            <CardTitle></CardTitle>
-          </CardHeader>
-          <CardContent className="flex justify-center items-center text-center"></CardContent>
-        </Card>
-      </div>
+            </div>
+            <Separator className="mt-4" />
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <DadosPerfilForm
+            ref={formRef}
+            editando={editando}
+            onSaveSuccess={handleFormSaveSuccess}
+          />
+        </CardContent>
+      </Card>
     </div>
-  );
+
+    <div className="mt-4 flex justify-center">
+      <Card className="w-full max-w-[700px] h-[360px] mx-auto">
+        <CardHeader className="flex justify-center items-center text-center">
+          <CardTitle></CardTitle>
+        </CardHeader>
+        <CardContent className="flex justify-center items-center text-center"></CardContent>
+      </Card>
+    </div>
+  </div>
+);
 }

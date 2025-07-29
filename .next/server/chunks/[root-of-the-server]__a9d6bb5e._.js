@@ -286,7 +286,7 @@ async function POST(request) {
             html: `
         <p>Olá ${nome},</p>
         <p>Para ativar sua conta, clique no link abaixo:</p>
-        <a href="${("TURBOPACK compile-time value", "http://localhost:3000")}/api/verificar-email?token=${tokenVerificacao}">Confirmar e-mail</a>
+        <a href="${("TURBOPACK compile-time value", "http://localhost:3001")}/api/verificar-email?token=${tokenVerificacao}">Confirmar e-mail</a>
       `
         });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({

@@ -1,6 +1,7 @@
 "use client";
 
 import { AppSidebar } from "@/components/_sidebar/app-sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 export default function DashboardLayout({
   children,
 }: {
@@ -8,14 +9,12 @@ export default function DashboardLayout({
 }) {
   return (
     <div>
-      <div>
-
+      <SidebarProvider>
         <div>
           <AppSidebar />
         </div>
-          <main>{children}</main>
-        </div>
-
+        <main>{children}</main>
+      </SidebarProvider>
     </div>
   );
 }
