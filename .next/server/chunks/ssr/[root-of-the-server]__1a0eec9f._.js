@@ -152,7 +152,6 @@ function CardFooter({ className, ...props }) {
 
 var { g: global, __dirname } = __turbopack_context__;
 {
-// lib/useTokenRedirect.ts
 __turbopack_context__.s({
     "Redirecionar": (()=>Redirecionar)
 });

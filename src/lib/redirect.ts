@@ -1,4 +1,3 @@
-// lib/useTokenRedirect.ts
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
