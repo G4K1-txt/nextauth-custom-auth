@@ -1,6 +1,6 @@
 'use client'
 
-import { RegisterForm } from "@/components/_forms/register-form"
+import { RegisterForm } from "@/components/_forms/register_form"
 export default function CadastroPage() {
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">

@@ -21,7 +21,6 @@ export async function POST(request: Request) {
       endereco,
       numero,
       complemento,
-      
     } = data;
 
     // Validação básica

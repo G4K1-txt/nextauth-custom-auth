@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     const user = await prisma.user.findFirst({
       where: {
         tokenVerificacao: token,
-        emailVerificado: null, // Garante que o e-mail ainda não foi verificado
+        emailVerificado: null,
       },
     });
 

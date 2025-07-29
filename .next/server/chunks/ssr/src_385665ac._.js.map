@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 16, "column": 0}, "map": {"version":3,"sources":["file:///C:/fine/src/app/recuperar-senha/page.tsx"],"sourcesContent":["\"use client\";\r\n\r\nimport { RecuperarSenhaForm } from \"@/components/_forms/recuperar_senha_form\";\r\n\r\nexport default function Page() {\r\n  return (\r\n    <div className=\"flex min-h-svh w-full items-center justify-center p-6 md:p-10\">\r\n      <div className=\"w-full max-w-sm space-y-4\">\r\n        <RecuperarSenhaForm />\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;AAEA;AAFA;;;AAIe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;kBACb,cAAA,8OAAC;YAAI,WAAU;sBACb,cAAA,8OAAC,oJAAA,CAAA,qBAAkB;;;;;;;;;;;;;;;AAI3B","debugId":null}}]
+}

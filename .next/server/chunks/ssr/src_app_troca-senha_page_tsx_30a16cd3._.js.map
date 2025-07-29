@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///C:/fine/src/app/troca-senha/page.tsx"],"sourcesContent":["\"use client\";\r\n\r\nimport { Atualizar } from \"@/components/_forms/senha_atualizar_form\";\r\n\r\nexport default function Page() {\r\n  return (\r\n    <div className=\"flex min-h-svh w-full items-center justify-center p-6 md:p-10\">\r\n      <div className=\"w-full max-w-sm space-y-4\">\r\n        <AtualizarSenhaForm />\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;AAAA;;AAIe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;kBACb,cAAA,8OAAC;YAAI,WAAU;sBACb,cAAA,8OAAC;;;;;;;;;;;;;;;AAIT","debugId":null}}]
+}

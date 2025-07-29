@@ -15,10 +15,12 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <body>
+        <div>
         <Providers>
            <Toaster richColors position="top-right" />
           {children}
         </Providers>
+        </div>
       </body>
     </html>
   )
