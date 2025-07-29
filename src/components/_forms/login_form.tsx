@@ -68,7 +68,7 @@ export function LoginForm({
                 <div className="flex items-center">
                   <Label htmlFor="password">Senha</Label>
                   <a
-                    href="#"
+                    href="/recuperar-senha"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
                     Esqueceu sua senha?

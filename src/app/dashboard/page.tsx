@@ -1,6 +1,4 @@
 "use client";
-
-import CardDashboard from "@/components/_card/cardDashboard";
 import { AppSidebar } from "@/components/_sidebar/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
@@ -21,12 +19,8 @@ export default function DashboardPage() {
         <div className="flex overflow-hidden">
           <div>
             <h1 className="py-4 pl-2 text-4xl font-bold tracking-tight text-balance">Dashboard</h1>
-            <main className="flex justify-center h-screen w-screen">
+            <main className="flex justify-center">
               <div className="flex pt-10 gap-2">
-                <CardDashboard />
-                <CardDashboard />
-                <CardDashboard />
-                <CardDashboard />
               </div>
             </main>
           </div>

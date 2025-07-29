@@ -75,10 +75,9 @@ const handleSubmit = async (e: React.FormEvent) => {
 
     alert("Usuário cadastrado com sucesso! Enviando link de verificação...");
 
-    // CHAMA O SIGNIN por email com redirect false
     await signIn("email", {
       email: form.email,
-      callbackUrl: "/", // ou para onde você quiser redirecionar após login
+      callbackUrl: "/",
     });
 
   } catch (error) {

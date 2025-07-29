@@ -1,5 +1,13 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/atualiza-senha/route": "app/api/atualiza-senha/route.js",
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/api/envia-email/route": "app/api/envia-email/route.js",
+  "/api/localiza-email/route": "app/api/localiza-email/route.js",
+  "/cadastro/page": "app/cadastro/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/login/page": "app/login/page.js",
+  "/recuperar-senha/page": "app/recuperar-senha/page.js",
+  "/troca-senha/page": "app/troca-senha/page.js"
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import "./globals.css"
-import { Providers } from "./providers" // 👈 importa aqui
+import { Providers } from "./providers"
+import { Toaster } from 'sonner';
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,9 +17,12 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <body>
+        <div>
         <Providers>
+          <Toaster richColors position="top-right" />
           {children}
         </Providers>
+        </div>
       </body>
     </html>
   )
