@@ -9,12 +9,12 @@ export default function DashboardLayout({
 }) {
   return (
     <div>
-        <SidebarProvider>
-          <div>
-            <AppSidebar />
-          </div>
-          <main>{children}</main>
-        </SidebarProvider>
-      </div>
+      <SidebarProvider>
+        <div>
+          <AppSidebar />
+        </div>
+        <main>{children}</main>
+      </SidebarProvider>
+    </div>
   );
 }

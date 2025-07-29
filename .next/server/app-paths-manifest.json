@@ -2,6 +2,7 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/api/atualiza-senha/route": "app/api/atualiza-senha/route.js",
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+<<<<<<< HEAD
   "/api/envia-email/route": "app/api/envia-email/route.js",
   "/api/localiza-email/route": "app/api/localiza-email/route.js",
   "/cadastro/page": "app/cadastro/page.js",
@@ -10,4 +11,10 @@
   "/login/page": "app/login/page.js",
   "/recuperar-senha/page": "app/recuperar-senha/page.js",
   "/troca-senha/page": "app/troca-senha/page.js"
+=======
+  "/api/user/[id]/route": "app/api/user/[id]/route.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/profile/page": "app/dashboard/profile/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
+>>>>>>> 4d9c34eff7539dd03d0a04b9020b4ae9bcf9666a
 }
