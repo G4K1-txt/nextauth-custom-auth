@@ -29,51 +29,50 @@ export function PerfilPage() {
 
   const handleEditClick = () => setEditando(true);
 
-  const handleFormSaveSuccess = () => setEditando(false);    
+  const handleFormSaveSuccess = () => setEditando(false);
 
-return (
-  <div className="px-4">
-    <h1 className="py-4 text-3xl sm:text-4xl font-bold tracking-tight text-balance">
-      Perfil
-    </h1>
+  return (
+    <div className="px-4">
+      <div className="flex justify-center">
+        <h1 className="py-4 text-3xl sm:text-4xl font-bold tracking-tight text-balance">
+          Perfil
+        </h1>
+      </div>
 
-    <div className="flex justify-center">
-      <Card className="w-full h-auto mx-auto">
-        <CardHeader>
-          <CardTitle>
-            <div className="flex items-center justify-between flex-wrap gap-2">
-              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight">
-                {session.user?.name}
-              </h3>
-              <div className="flex gap-3">
-                {!editando ? (
-                  <ButtonIconEditar onClick={handleEditClick} />
-                ) : (
-                  <ButtonIconSalvar onClick={handleSaveClick} />
-                )}
+      <div className="flex justify-center gap-5">
+        <Card className="w-full h-auto mx-auto">
+          <CardHeader>
+            <CardTitle>
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <h3 className="text-xl sm:text-2xl font-semibold tracking-tight">
+                  {session.user?.name}
+                </h3>
+                <div className="flex gap-3">
+                  {!editando ? (
+                    <ButtonIconEditar onClick={handleEditClick} />
+                  ) : (
+                    <ButtonIconSalvar onClick={handleSaveClick} />
+                  )}
+                </div>
               </div>
-            </div>
-            <Separator className="mt-4" />
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <DadosPerfilForm
-            ref={formRef}
-            editando={editando}
-            onSaveSuccess={handleFormSaveSuccess}
-          />
-        </CardContent>
-      </Card>
+              <Separator className="mt-4" />
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <DadosPerfilForm
+              ref={formRef}
+              editando={editando}
+              onSaveSuccess={handleFormSaveSuccess}
+            />
+          </CardContent>
+        </Card>
+        <Card className="w-full h-auto mx-auto">
+          <CardHeader className="flex justify-center items-center text-center">
+            <CardTitle></CardTitle>
+          </CardHeader>
+          <CardContent className="flex justify-center items-center text-center"></CardContent>
+        </Card>
+      </div>
     </div>
-
-    <div className="mt-4 flex justify-center">
-      <Card className="w-full max-w-[700px] h-[360px] mx-auto">
-        <CardHeader className="flex justify-center items-center text-center">
-          <CardTitle></CardTitle>
-        </CardHeader>
-        <CardContent className="flex justify-center items-center text-center"></CardContent>
-      </Card>
-    </div>
-  </div>
-);
+  );
 }

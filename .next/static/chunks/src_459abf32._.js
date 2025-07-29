@@ -152,7 +152,6 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 
 var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
 {
-// lib/useTokenRedirect.ts
 __turbopack_context__.s({
     "Redirecionar": (()=>Redirecionar)
 });
