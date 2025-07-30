@@ -19,7 +19,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState()
   const [senha, setSenha] = useState("")
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
