@@ -66,12 +66,6 @@ export function PerfilPage() {
             />
           </CardContent>
         </Card>
-        <Card className="w-full h-auto mx-auto">
-          <CardHeader className="flex justify-center items-center text-center">
-            <CardTitle></CardTitle>
-          </CardHeader>
-          <CardContent className="flex justify-center items-center text-center"></CardContent>
-        </Card>
       </div>
     </div>
   );

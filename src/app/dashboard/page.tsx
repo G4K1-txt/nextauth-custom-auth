@@ -1,5 +1,5 @@
-"use client";
 
+export default async function DashboardPage() {
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
