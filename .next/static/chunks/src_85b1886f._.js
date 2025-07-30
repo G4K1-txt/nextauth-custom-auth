@@ -1392,23 +1392,23 @@ function DashboardLayout({ children }) {
                         children: children
                     }, void 0, false, {
                         fileName: "[project]/src/app/dashboard/layout.tsx",
-                        lineNumber: 19,
+                        lineNumber: 17,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/dashboard/layout.tsx",
-                lineNumber: 14,
+                lineNumber: 15,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/dashboard/layout.tsx",
-            lineNumber: 13,
+            lineNumber: 14,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/dashboard/layout.tsx",
-        lineNumber: 12,
+        lineNumber: 13,
         columnNumber: 5
     }, this);
 }

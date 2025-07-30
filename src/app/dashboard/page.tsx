@@ -1,22 +1,5 @@
-"use client";
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-
-export default function DashboardPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === "unauthenticated" || (status === "loading" && !session)) {
-      router.replace("/login");
-    }
-  }, [status, session, router]);
-
-  if (status === "loading") return <p>Carregando...</p>;
-
-  if (!session) return null;
+export default async function DashboardPage() {
 
   return (
     <div className="flex overflow-hidden min-h-screen">

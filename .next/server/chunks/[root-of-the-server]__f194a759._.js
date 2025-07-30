@@ -201,6 +201,13 @@ const authOptions = {
             }
         })
     ],
+    session: {
+        strategy: "jwt",
+        maxAge: 60 * 60 * 24 * 7
+    },
+    jwt: {
+        maxAge: 60 * 60 * 24 * 7
+    },
     callbacks: {
         async jwt ({ token, user }) {
             if (user) {
@@ -227,7 +234,6 @@ const authOptions = {
     },
     secret: process.env.NEXTAUTH_SECRET
 };
-// 2. Passe as 'authOptions' para o NextAuth e exporte o handler
 const handler = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"])(authOptions);
 ;
 }}),
