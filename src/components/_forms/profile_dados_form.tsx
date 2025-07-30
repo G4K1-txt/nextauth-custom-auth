@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import { formatCpf, formatContato } from "@/lib/mascaras";
 import { fetchCepData } from "@/lib/buscaCep";
 import { DadosPerfilFormProps, DadosPerfilFormHandle } from "@/types/forms";
-import { toast } from 'sonner';
+import { toast } from "sonner"
 
 
 export const DadosPerfilForm = forwardRef<

@@ -24,7 +24,11 @@ function DashboardPage() {
         children: "Carregando..."
     }, void 0, false, {
         fileName: "[project]/src/app/dashboard/page.tsx",
+<<<<<<< HEAD
         lineNumber: 12,
+=======
+        lineNumber: 24,
+>>>>>>> 3077dd105149caf622c5c4cc2238d2faea44e5d2
         columnNumber: 36
     }, this);
     if (!session) return null;
@@ -38,32 +42,53 @@ function DashboardPage() {
                     children: "Dashboard"
                 }, void 0, false, {
                     fileName: "[project]/src/app/dashboard/page.tsx",
+<<<<<<< HEAD
                     lineNumber: 19,
+=======
+                    lineNumber: 31,
+>>>>>>> 3077dd105149caf622c5c4cc2238d2faea44e5d2
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
                     className: "flex justify-center flex-1",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex pt-10 gap-2"
+                        className: "flex pt-10 gap-2",
+                        children: "aqui"
                     }, void 0, false, {
                         fileName: "[project]/src/app/dashboard/page.tsx",
+<<<<<<< HEAD
                         lineNumber: 23,
+=======
+                        lineNumber: 35,
+>>>>>>> 3077dd105149caf622c5c4cc2238d2faea44e5d2
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/dashboard/page.tsx",
+<<<<<<< HEAD
                     lineNumber: 22,
+=======
+                    lineNumber: 34,
+>>>>>>> 3077dd105149caf622c5c4cc2238d2faea44e5d2
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/dashboard/page.tsx",
+<<<<<<< HEAD
             lineNumber: 18,
+=======
+            lineNumber: 30,
+>>>>>>> 3077dd105149caf622c5c4cc2238d2faea44e5d2
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/dashboard/page.tsx",
+<<<<<<< HEAD
         lineNumber: 17,
+=======
+        lineNumber: 29,
+>>>>>>> 3077dd105149caf622c5c4cc2238d2faea44e5d2
         columnNumber: 5
     }, this);
 }
