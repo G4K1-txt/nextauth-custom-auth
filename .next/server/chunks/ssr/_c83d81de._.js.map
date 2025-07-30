@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 24, "column": 0}, "map": {"version":3,"sources":["file:///C:/fine/src/app/perfil/page.tsx"],"sourcesContent":["// pages/perfil/page.tsx ou app/perfil/page.tsx (se a página ainda for \"Server Component\")\r\n\r\n// Importe sua própria função de verificação de sessão\r\nimport { verificarSessao } from '@/lib/auth'; // Você precisará criar isso\r\nimport { redirect } from \"next/navigation\";\r\n\r\nexport default async function PerfilPage() {\r\n  const sessaoUsuario = await verificarSessao(); // Sua função para pegar a sessão\r\n\r\n  if (!sessaoUsuario || !sessaoUsuario.isLoggedIn) { // Adapte conforme sua função 'verificarSessao' retornar\r\n    redirect(\"/login\");\r\n  }\r\n\r\n  return (\r\n    <div className=\"p-8\">\r\n      <h1 className=\"text-2xl font-bold\">Perfil</h1>\r\n      {/* Adapte conforme os dados do usuário que sua sessão contém */}\r\n      <p>Bem-vindo, {sessaoUsuario.user?.nome || sessaoUsuario.user?.email}</p>\r\n    </div>\r\n  );\r\n}"],"names":[],"mappings":"AAAA,0FAA0F;AAE1F,sDAAsD;;;;;;;;;;AAEtD;AAAA;;;;AAEe,eAAe;IAC5B,MAAM,gBAAgB,MAAM,mBAAmB,iCAAiC;IAEhF,IAAI,CAAC,iBAAiB,CAAC,cAAc,UAAU,EAAE;QAC/C,CAAA,GAAA,qLAAA,CAAA,WAAQ,AAAD,EAAE;IACX;IAEA,qBACE,8OAAC;QAAI,WAAU;;0BACb,8OAAC;gBAAG,WAAU;0BAAqB;;;;;;0BAEnC,8OAAC;;oBAAE;oBAAY,cAAc,IAAI,EAAE,QAAQ,cAAc,IAAI,EAAE;;;;;;;;;;;;;AAGrE","debugId":null}}]
-}
