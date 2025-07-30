@@ -1,5 +1,4 @@
 
-export default async function DashboardPage() {
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -32,7 +31,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-export default function DashboardPage() {
+export default async function DashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [date, setDate] = React.useState<Date>();
