@@ -1,10 +1,9 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-<<<<<<< HEAD
   "/api/user/[id]/route": "app/api/user/[id]/route.js",
-=======
->>>>>>> 3077dd105149caf622c5c4cc2238d2faea44e5d2
   "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/profile/page": "app/dashboard/profile/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/login/page": "app/login/page.js"
 }
