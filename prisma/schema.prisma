@@ -25,7 +25,14 @@ model user {
   tokenVerificacao String?
   createdAt DateTime @default(now())
 }
-
+model despesa {
+  id Int @id @default(autoincrement())
+  descrDespesa String
+  valorDespesa String
+  categDespesa String
+  dataDespesa DateTime
+  despesaFixa Boolean @default(false)
+}
 model VerificationToken {
   id         Int      @id @default(autoincrement())
   identifier String

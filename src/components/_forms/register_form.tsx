@@ -12,28 +12,27 @@ export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-const [form, setForm] = useState({
-  email: "",
-  senha: "",
-  nome: "",
-  cpf: "",
-});
-const [senhaConfirma, setSenhaConfirma] = useState("");
-const [strength, setStrength] = useState(0);
-const [erroSenha, setErroSenha] = useState('');
+  const [form, setForm] = useState({
+    email: "",
+    senha: "",
+    nome: "",
+    cpf: "",
+  });
+  const [senhaConfirma, setSenhaConfirma] = useState("");
+  const [strength, setStrength] = useState(0);
+  const [erroSenha, setErroSenha] = useState("");
 
-//MASCARAMENTO CPF
-const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  let value = e.target.value.replace(/\D/g, "").slice(0, 11);
-  value = value.replace(/(\d{3})(\d)/, "$1.$2");
-  value = value.replace(/(\d{3})(\d)/, "$1.$2");
-  value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  //MASCARAMENTO CPF
+  const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, "").slice(0, 11);
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
 
-  setForm((prev) => ({ ...prev, cpf: value }));
-};
+    setForm((prev) => ({ ...prev, cpf: value }));
+  };
 
-//VERIFICAÇÃO SENHA PARA FORÇA DA SENHA
-const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedForm = { ...form, [e.target.name]: e.target.value };
     setForm(updatedForm);
 
@@ -44,7 +43,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     }
   };
 
-const strengthClass =
+  const strengthClass =
     [
       "bg-red-500",
       "bg-orange-500",
@@ -53,39 +52,36 @@ const strengthClass =
       "bg-green-700",
     ][strength] || "bg-gray-300";
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-
-  if (form.senha !== senhaConfirma) {
-    return alert("As senhas não coincidem!");
-  }
-
-  try {
-    const res = await fetch("/api/cadastro", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-
-    if (!res.ok) {
-      const error = await res.json();
-      return alert(error.error || "Erro no cadastro");
+    if (form.senha !== senhaConfirma) {
+      return alert("As senhas não coincidem!");
     }
 
-    alert("Usuário cadastrado com sucesso! Enviando link de verificação...");
+    try {
+      const res = await fetch("/api/cadastro", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-    await signIn("email", {
-      email: form.email,
-      callbackUrl: "/",
-    });
+      if (!res.ok) {
+        const error = await res.json();
+        return alert(error.error || "Erro no cadastro");
+      }
 
-  } catch (error) {
-    console.error("Erro no submit:", error);
-    alert("Erro inesperado no envio do formulário.");
-  }
-};
+      alert("Usuário cadastrado com sucesso! Enviando link de verificação...");
 
+      await signIn("email", {
+        email: form.email,
+        callbackUrl: "/",
+      });
+    } catch (error) {
+      console.error("Erro no submit:", error);
+      alert("Erro inesperado no envio do formulário.");
+    }
+  };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -118,7 +114,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   id="cpf"
                   value={form.cpf}
                   type="text"
-                  placeholder="000.000.00-00"
+                  placeholder="000.000.000-00"
                   required
                 />
               </div>
@@ -154,18 +150,20 @@ const handleSubmit = async (e: React.FormEvent) => {
                     const confirm = e.target.value;
                     setSenhaConfirma(confirm);
                     if (form.senha && confirm && form.senha !== confirm) {
-                        setErroSenha ("Senhas não coincidem!");
-                    }else{
-                        setErroSenha("");
+                      setErroSenha("Senhas não coincidem!");
+                    } else {
+                      setErroSenha("");
                     }
-                }}
+                  }}
                   name="senhaConfirma"
                   id="senhaConfirma"
                   value={senhaConfirma}
                   type="password"
                   required
                 />
-                {erroSenha && <p className="text-sm text-red-600 mb-2">{erroSenha}</p>}
+                {erroSenha && (
+                  <p className="text-sm text-red-600 mb-2">{erroSenha}</p>
+                )}
                 <div className="h-2 w-full bg-gray-300 rounded overflow-hidden">
                   <div
                     className={`h-full transition-all duration-300 ${strengthClass}`}
@@ -178,7 +176,11 @@ const handleSubmit = async (e: React.FormEvent) => {
                 </p>
               </div>
               <div className="flex flex-col gap-3">
-                <Button  onClick={handleSubmit} type="submit" className="w-full cursor-pointer">
+                <Button
+                  onClick={handleSubmit}
+                  type="submit"
+                  className="w-full cursor-pointer"
+                >
                   Cadastrar
                 </Button>
               </div>

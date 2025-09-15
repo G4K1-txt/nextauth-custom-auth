@@ -1,8 +1,12 @@
 "use client";
-
+import * as React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { toast } from "sonner";
 import {
   Select,
   SelectContent,
@@ -19,23 +23,68 @@ import {
   DialogClose,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Calendar as CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import * as React from "react";
+
 export function CadastroDespesa() {
   const [date, setDate] = React.useState<Date>();
   const [open, setOpen] = React.useState(false);
+  const [descrDespesa, setDescricao] = React.useState("");
+  const [valorDespesa, setValor] = React.useState("");
+  const [categDespesa, setCategoria] = React.useState("");
+  const [despesaFixa, setDespesaFixa] = React.useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!descrDespesa || !valorDespesa || !categDespesa || !date) {
+      alert("Preencha todos os campos obrigatórios.");
+      return;
+    }
+
+    const payload = {
+      descrDespesa,
+      valorDespesa,
+      categDespesa,
+      dataDespesa: date.toISOString(),
+      despesaFixa,
+    };
+
+    try {
+      const res = await fetch("/api/cadastro-despesa", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.error || "Erro ao cadastrar despesa.");
+        return;
+      }
+      toast.success("Despesa cadastrada com sucesso!");
+
+      setDescricao("");
+      setValor("");
+      setCategoria("");
+      setDespesaFixa(false);
+      setDate(undefined);
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao conectar com o servidor.");
+    }
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <DialogTrigger asChild>
-        <Button variant="outline">Adicionar Despesa</Button>
+        <Button variant="outline" className="cursor-pointer">
+          Adicionar Despesa
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[400px]">
         <DialogHeader>
@@ -47,16 +96,32 @@ export function CadastroDespesa() {
         <div className="grid gap-4">
           <div className="grid gap-3 w-full">
             <Label htmlFor="descricao">Descrição</Label>
-            <Input id="descricao" name="descricao" />
+            <Input
+              id="descricao"
+              value={descrDespesa}
+              onChange={(e) => setDescricao(e.target.value)}
+            />
           </div>
-          <div className="columns-2 gap-8 max-w-[270px] ">
+          <div className="columns-2 gap-8 max-w-[270px]">
             <div className="grid gap-3">
               <Label htmlFor="valor">Valor</Label>
-              <Input id="valor" name="valor" />
+              <Input
+                id="valor"
+                type="text"
+                value={valorDespesa}
+                onChange={(e) => {
+                  const valor = e.target.value;
+                  const somenteNumerosEVirgula = valor.replace(/[^0-9,]/g, "");
+                  setValor(somenteNumerosEVirgula);
+                }}
+              />
             </div>
             <div className="grid gap-3 w-full">
               <Label htmlFor="categoria">Categoria</Label>
-              <Select name="categoria">
+              <Select
+                value={categDespesa}
+                onValueChange={(value) => setCategoria(value)}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione uma categoria" />
                 </SelectTrigger>
@@ -68,8 +133,8 @@ export function CadastroDespesa() {
               </Select>
             </div>
           </div>
-          <div className="columns-2 gap-">
-            <div className="columns-2 flex flex-col gap-3 max-w-[150px]">
+          <div className="columns-2">
+            <div className="flex flex-col gap-3 max-w-[150px]">
               <Label htmlFor="date" className="px-1">
                 Data da Despesa
               </Label>
@@ -80,7 +145,7 @@ export function CadastroDespesa() {
                     id="date"
                     className="w-48 justify-between font-normal"
                   >
-                    {date ? date.toLocaleDateString() : "Select date"}
+                    {date ? date.toLocaleDateString() : "Selecione a data"}
                     <CalendarIcon />
                   </Button>
                 </PopoverTrigger>
@@ -92,15 +157,19 @@ export function CadastroDespesa() {
                     mode="single"
                     selected={date}
                     captionLayout="dropdown"
-                    onSelect={(date) => {
-                      setDate(date);
+                    onSelect={(d) => {
+                      setDate(d);
                       setOpen(false);
                     }}
                   />
                 </PopoverContent>
               </Popover>
               <div className="flex items-center gap-3 mt-5 ms-5">
-                <Checkbox id="despesa_fixa" />
+                <Checkbox
+                  id="despesa_fixa"
+                  checked={despesaFixa}
+                  onCheckedChange={(checked) => setDespesaFixa(!!checked)}
+                />
                 <Label htmlFor="despesa_fixa">Despesa Fixa</Label>
               </div>
             </div>
@@ -108,9 +177,11 @@ export function CadastroDespesa() {
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button className="cursor-pointer" variant="outline">Cancelar</Button>
           </DialogClose>
-          <Button type="submit">Save changes</Button>
+          <Button className="cursor-pointer" onClick={handleSubmit} type="submit">
+            Salvar
+          </Button>
         </DialogFooter>
       </DialogContent>
     </form>
