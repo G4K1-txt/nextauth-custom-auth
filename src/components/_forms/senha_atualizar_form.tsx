@@ -86,7 +86,7 @@ export function AtualizarSenhaForm() {
 
       toast.success("Senha atualizada com sucesso!");
       setTimeout(() => {
-        router.push("/login");
+        router.push("");
       }, 1000);
     } catch (err) {
       toast.error("Erro inesperado: " + err);

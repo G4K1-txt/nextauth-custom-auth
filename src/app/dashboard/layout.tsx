@@ -12,15 +12,15 @@ export default async function DashboardLayout({
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect("/login");
+    redirect("");
   }
 
   return (
     <div>
       <SidebarProvider>
-        <div className="flex h-screen overflow-hidden">
+        <div className="flex flex-col items-center h-dvh w-dvw">
           <AppSidebar />
-          <main className="flex-1 ">{children}</main>
+          <main className="flex ">{children}</main>
         </div>
       </SidebarProvider>
     </div>
