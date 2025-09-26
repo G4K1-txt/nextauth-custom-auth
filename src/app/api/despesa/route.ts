@@ -5,7 +5,15 @@ import { NextResponse } from "next/server"
 export async function GET() {
   try {
     const despesas = await prisma.despesa.findMany({
-      orderBy: { dataDespesa: "desc" }, // ordena da mais recente pra mais antiga
+      orderBy: { dataDespesa: "desc" },
+       select: {
+        id: true,              // garante que vem
+        descrDespesa: true,
+        categDespesa: true,
+        valorDespesa: true,
+        dataDespesa: true,
+        pago: true,            // garante que vem (mesmo se null/false)
+      }, // ordena da mais recente pra mais antiga
     })
     return NextResponse.json(despesas)
   } catch (error) {

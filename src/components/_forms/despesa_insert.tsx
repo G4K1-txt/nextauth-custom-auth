@@ -29,6 +29,27 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+type DespesaFixaCheckboxProps = {
+  checked: boolean;
+  onChange: (val: boolean) => void;
+};
+
+const DespesaFixaCheckbox = React.memo(function DespesaFixaCheckbox({
+  checked,
+  onChange,
+}: DespesaFixaCheckboxProps) {
+  return (
+    <div className="flex items-center gap-3 mt-9 ms-5">
+      <Checkbox
+        id="despesa_fixa"
+        className="cursor-pointer"
+        checked={checked}
+        onCheckedChange={(c) => onChange(!!c)}
+      />
+      <Label htmlFor="despesa_fixa">Despesa Fixa</Label>
+    </div>
+  );
+});
 
 type CadastroDespesaProps = {
   onDespesaCadastrada?: () => void;
@@ -81,10 +102,7 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
       setDespesaFixa(false);
       setDate(undefined);
 
-      // Dispara atualização da tabela
       onDespesaCadastrada?.();
-
-      // Fecha o dialog
       setOpen(false);
     } catch (err) {
       console.error(err);
@@ -103,13 +121,14 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
       <DialogContent className="sm:max-w-[400px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle>Adicionar nova despesa</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="mb-2 ml-1">Nova despesa</DialogTitle>
+            <DialogDescription className="mb-2 ml-1">
               Adicione uma nova despesa preenchendo os campos abaixo.
             </DialogDescription>
           </DialogHeader>
 
           <div className="grid gap-4">
+            {/* Descrição */}
             <div className="grid gap-3 w-full">
               <Label htmlFor="descricao" className="ml-1">
                 Descrição
@@ -122,6 +141,7 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
               />
             </div>
 
+            {/* Valor e Categoria */}
             <div className="columns-2 gap-8 max-w-[270px]">
               <div className="grid gap-3">
                 <Label htmlFor="valor" className="ml-1">
@@ -143,10 +163,10 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
                   Categoria
                 </Label>
                 <Select value={categDespesa} onValueChange={setCategoria}>
-                  <SelectTrigger>
+                  <SelectTrigger className="cursor-pointer">
                     <SelectValue placeholder="Selecione uma categoria" />
                   </SelectTrigger>
-                  <SelectContent className="cursor-pointer">
+                  <SelectContent>
                     <SelectItem value="Moradia">Moradia</SelectItem>
                     <SelectItem value="Educação">Educação</SelectItem>
                     <SelectItem value="Alimentação">Alimentação</SelectItem>
@@ -167,6 +187,7 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
               </div>
             </div>
 
+            {/* Data e Checkbox */}
             <div className="columns-2">
               <div className="flex flex-col gap-3 max-w-[150px]">
                 <Label htmlFor="date" className="px-1">
@@ -196,26 +217,25 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
                   </PopoverContent>
                 </Popover>
 
-                <div className="flex items-center gap-3 mt-9 ms-5">
-                  <Checkbox
-                    id="despesa_fixa"
-                    className="cursor-pointer"
-                    checked={despesaFixa}
-                    onCheckedChange={(checked) => setDespesaFixa(!!checked)}
-                  />
-                  <Label htmlFor="despesa_fixa">Despesa Fixa</Label>
-                </div>
+                {/* Checkbox separado */}
+                <DespesaFixaCheckbox
+                  checked={despesaFixa}
+                  onChange={setDespesaFixa}
+                />
               </div>
             </div>
           </div>
 
-          <DialogFooter>
+          <DialogFooter className="mt-8">
             <DialogClose asChild>
-              <Button className="cursor-pointer" variant="outline">
+              <Button className="cursor-pointer hover:bg-red-800 bg-gray-800 text-white">
                 Cancelar
               </Button>
             </DialogClose>
-            <Button className="cursor-pointer" type="submit">
+            <Button
+              className="cursor-pointer hover:bg-green-600 hover:text-white"
+              type="submit"
+            >
               Salvar
             </Button>
           </DialogFooter>

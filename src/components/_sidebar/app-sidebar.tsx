@@ -46,7 +46,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="p-6">MOEDIN</SidebarGroupLabel>
+          <SidebarGroupLabel className="p-5">MOEDIN</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (

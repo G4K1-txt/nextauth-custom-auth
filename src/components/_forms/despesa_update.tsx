@@ -100,16 +100,16 @@ export function AlteraDespesa({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="cursor-pointer w-18 h-8 text-white mr-2 bg-gray-800 hover:bg-sky-600 font-bold">
+      <DialogTrigger className="items-center"asChild>
+        <Button className="cursor-pointer items-center w-18 h-8 text-white mr-2 bg-gray-800 hover:bg-sky-600 font-bold">
           Editar
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[400px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle>Editar despesa</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="mb-2 ml-1">Editar Despesa</DialogTitle>
+            <DialogDescription className="mb-2 ml-1">
               Altere os campos da despesa e salve.
             </DialogDescription>
           </DialogHeader>
@@ -227,15 +227,15 @@ export function AlteraDespesa({
             </div>
           </div>
 
-          <DialogFooter>
+          <DialogFooter className="mt-8">
             <Button
+              className="cursor-pointer hover:bg-red-800 bg-gray-800  text-white"
               type="button"
-              variant="outline"
               onClick={() => setOpen(false)}
             >
               Cancelar
             </Button>
-            <Button type="submit">Salvar</Button>
+            <Button className="cursor-pointer hover:bg-green-600 hover:text-white" type="submit">Salvar</Button>
           </DialogFooter>
         </form>
       </DialogContent>

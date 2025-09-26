@@ -6,24 +6,18 @@ import React, { useState } from "react";
 
 export default function DashboardPage() {
   const [atualizarTabela, setAtualizarTabela] = useState(false);
-
-  // Função que dispara a atualização da tabela
   function triggerAtualizacao() {
     setAtualizarTabela((prev) => !prev);
   }
 
   return (
-    <div className="flex flex-col h-dvh w-dvw">
-      <div className="mt-4  mr-4 justify-items-center">
-        <div className="w-4/6 ">
-          <div className="">
-            <Dialog>
-              <CadastroDespesa onDespesaCadastrada={triggerAtualizacao} />
-            </Dialog>
-          </div>
-        </div>
+    <div className="mt-4 ml-4">
+      <div>
+        <Dialog>
+          <CadastroDespesa onDespesaCadastrada={triggerAtualizacao} />
+        </Dialog>
       </div>
-      <div className="mt-4 justify-items-center">
+      <div>
         <TabelaDespesa atualizar={atualizarTabela} />
       </div>
     </div>

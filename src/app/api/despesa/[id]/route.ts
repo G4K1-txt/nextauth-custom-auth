@@ -5,13 +5,14 @@ import { NextResponse } from "next/server";
 // DELETE despesa
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> } // 👈 params é uma Promise
 ) {
   try {
-    const id = Number(params.id);
+    const { id } = await context.params; // 👈 precisa do await
+    const idNumber = Number(id);
 
     await prisma.despesa.delete({
-      where: { id },
+      where: { id: idNumber },
     });
 
     return NextResponse.json(
@@ -30,15 +31,17 @@ export async function DELETE(
 // PUT (atualiza todos os campos enviados)
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = Number(params.id);
+    const { id } = await context.params;
+    const idNumber = Number(id);
+
     const body = await req.json();
     const { descrDespesa, valorDespesa, dataDespesa } = body;
 
     const despesaAtualizada = await prisma.despesa.update({
-      where: { id },
+      where: { id: idNumber },
       data: {
         descrDespesa,
         valorDespesa: String(valorDespesa),
@@ -56,17 +59,18 @@ export async function PUT(
   }
 }
 
-// PATCH (atualiza apenas os campos enviados)
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = Number(params.id);
+    const { id } = await context.params;
+    const idNumber = Number(id);
+
     const body = await req.json();
 
     const despesaAtualizada = await prisma.despesa.update({
-      where: { id },
+      where: { id: idNumber },
       data: body,
     });
 

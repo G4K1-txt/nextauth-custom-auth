@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import {
   Table,
@@ -21,6 +22,7 @@ type Despesa = {
   categDespesa: string;
   dataDespesa: string;
   despesaFixa: boolean;
+  pago?: boolean;
 };
 
 type TabelaProps = {
@@ -36,8 +38,14 @@ export function TabelaDespesa({ atualizar }: TabelaProps) {
     try {
       const res = await fetch("/api/despesa");
       if (!res.ok) throw new Error("Erro ao carregar despesas");
-      const data = await res.json();
-      setDespesas(data);
+      const data: Despesa[] = await res.json();
+
+      const despesasComPago = data.map((d) => ({
+        ...d,
+        pago: d.pago ?? false,
+      }));
+
+      setDespesas(despesasComPago);
     } catch (err) {
       console.error(err);
     } finally {
@@ -51,7 +59,6 @@ export function TabelaDespesa({ atualizar }: TabelaProps) {
 
   const excluirDespesa = async (id: number) => {
     if (!confirm("Tem certeza que quer excluir esta despesa?")) return;
-
     try {
       const res = await fetch(`/api/despesa/${id}`, { method: "DELETE" });
       if (res.ok) {
@@ -80,15 +87,16 @@ export function TabelaDespesa({ atualizar }: TabelaProps) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Descrição</TableHead>
-          <TableHead>Categoria</TableHead>
-          <TableHead>Fixa</TableHead>
-          <TableHead>Data</TableHead>
-          <TableHead>Valor</TableHead>
-          <TableHead>Pago</TableHead>
-          <TableHead>Ações</TableHead>
+          <TableHead className="">Descrição</TableHead>
+          <TableHead className="">Categoria</TableHead>
+          <TableHead className="text-center">Data</TableHead>
+          <TableHead className="text-center">Valor</TableHead>
+          <TableHead className="text-center">Fixa</TableHead>
+          <TableHead className="">Pago</TableHead>
+          <TableHead className="text-center">Ações</TableHead>
         </TableRow>
       </TableHeader>
+
       <TableBody>
         {loading ? (
           <TableRow>
@@ -101,17 +109,45 @@ export function TabelaDespesa({ atualizar }: TabelaProps) {
             <TableRow key={d.id}>
               <TableCell>{d.descrDespesa}</TableCell>
               <TableCell>{d.categDespesa}</TableCell>
-              <TableCell>{d.despesaFixa ? "Sim" : "Não"}</TableCell>
-              <TableCell>
+              <TableCell className=" text-center">
                 {new Date(d.dataDespesa).toLocaleDateString("pt-BR")}
               </TableCell>
-              <TableCell>
+              <TableCell className="text-center">
                 R$ {Number(String(d.valorDespesa).replace(",", ".")).toFixed(2)}
               </TableCell>
+              <TableCell className="text-center">{d.despesaFixa ? "Sim" : "Não"}</TableCell>
               <TableCell>
-                <Checkbox id="pago" className="cursor-pointer ml-2" />
+                <Checkbox
+                  checked={d.pago}
+                  onCheckedChange={async (checked) => {
+                    try {
+                      const res = await fetch(`/api/despesa/${d.id}`, {
+                        method: "PATCH",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ pago: checked }),
+                      });
+                      if (!res.ok) throw new Error("Erro ao atualizar pago");
+                      const despesaAtualizada = await res.json();
+
+                      setDespesas((prev) =>
+                        prev.map((item) =>
+                          item.id === despesaAtualizada.id
+                            ? despesaAtualizada
+                            : item
+                        )
+                      );
+                    } catch (err) {
+                      console.error(err);
+                      alert("Erro ao marcar como pago");
+                    }
+                  }}
+                  className="cursor-pointer ml-2"
+                />
               </TableCell>
-              <TableCell className="inline-flex gap-2">
+              <TableCell className="inline-flex">
+                
                 <AlteraDespesa
                   despesa={d}
                   onDespesaAtualizada={(nova) => atualizarDespesaLocal(nova)}
