@@ -107,13 +107,13 @@ export const DadosPerfilForm = forwardRef<
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <div className="grid grid-cols-2 gap-6">
-        <div className="gap-3">
+      <div className="grid grid-cols-2 gap-3">
+        <div className="">
           <Label htmlFor="email" className="ml-1">
             Email
           </Label>
           <Input
-            className="mt-3"
+            className="mt-2"
             id="email"
             type="email"
             value={dados.email ?? ""}
@@ -126,7 +126,7 @@ export const DadosPerfilForm = forwardRef<
             CPF
           </Label>
           <Input
-            className="mt-3"
+            className="mt-2"
             id="cpf"
             type="text"
             value={dados.cpf ?? ""}
@@ -136,7 +136,7 @@ export const DadosPerfilForm = forwardRef<
         </div>
       </div>
 
-      <Separator className="mt-5 mb-5" />
+      <Separator className="mt-3 mb-3" />
 
       <div className="grid grid-cols-2 gap-6">
         <div className="gap-3">
@@ -145,7 +145,7 @@ export const DadosPerfilForm = forwardRef<
           </Label>
           <Input
             placeholder="(00) 00000-0000"
-            className="mt-3"
+            className="mt-2"
             id="contato"
             type="text"
             value={dados.contato ?? ""}
@@ -159,7 +159,7 @@ export const DadosPerfilForm = forwardRef<
           </Label>
           <Input
             placeholder="00000-000"
-            className="mt-3"
+            className="mt-2"
             id="cep"
             type="text"
             value={dados.cep ?? ""}
@@ -169,7 +169,7 @@ export const DadosPerfilForm = forwardRef<
         </div>
       </div>
 
-      <Separator className="mt-5 mb-5" />
+      <Separator className="mt-3 mb-3" />
 
       <div className="flex gap-3">
         <div className="gap-3 ">
@@ -178,7 +178,7 @@ export const DadosPerfilForm = forwardRef<
           </Label>
           <Input
             placeholder="UF"
-            className="mt-3 w-12"
+            className="mt-2 w-12"
             id="estado"
             type="text"
             value={dados.estado ?? ""}
@@ -192,7 +192,7 @@ export const DadosPerfilForm = forwardRef<
           </Label>
           <Input
             placeholder="Cidade"
-            className="mt-3 w-60"
+            className="mt-2 w-60"
             id="cidade"
             type="text"
             value={dados.cidade ?? ""}
@@ -206,7 +206,7 @@ export const DadosPerfilForm = forwardRef<
           </Label>
           <Input
             placeholder="Rua/Bairro"
-            className="mt-3 w-60"
+            className="mt-2 w-60"
             id="endereco"
             type="text"
             value={dados.endereco ?? ""}
@@ -220,7 +220,7 @@ export const DadosPerfilForm = forwardRef<
           </Label>
           <Input
             placeholder="Nº"
-            className="mt-3 w-21"
+            className="mt-2 w-21"
             id="numero"
             type="text"
             value={dados.numero ?? ""}

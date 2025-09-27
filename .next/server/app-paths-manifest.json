@@ -5,8 +5,10 @@
   "/api/despesa/[id]/route": "app/api/despesa/[id]/route.js",
   "/api/despesa/route": "app/api/despesa/route.js",
   "/api/user/[id]/route": "app/api/user/[id]/route.js",
+  "/cadastro/page": "app/cadastro/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/dashboard/profile/page": "app/dashboard/profile/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/recuperar-senha/page": "app/recuperar-senha/page.js"
 }

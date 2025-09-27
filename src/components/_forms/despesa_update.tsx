@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { Settings } from 'lucide-react';
 import { Calendar } from "@/components/ui/calendar";
 import {
   Select,
@@ -101,8 +102,8 @@ export function AlteraDespesa({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className="items-center"asChild>
-        <Button className="cursor-pointer items-center w-18 h-8 text-white mr-2 bg-gray-800 hover:bg-sky-600 font-bold">
-          Editar
+        <Button className="cursor-pointer items-center w-8 h-8 text-white mr-2 bg-gray-800 hover:bg-sky-600 font-bold">
+          <Settings />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[400px]">

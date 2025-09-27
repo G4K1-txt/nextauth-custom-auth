@@ -5,12 +5,11 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
+import { Trash } from "lucide-react";
 import { AlteraDespesa } from "@/components/_forms/despesa_update";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -27,9 +26,15 @@ type Despesa = {
 
 type TabelaProps = {
   atualizar: boolean;
+  onTotalPagoAtualizado: (totalPago: number) => void;
+  onTotalNaoPagoAtualizado: (totalNaoPago: number) => void;
 };
 
-export function TabelaDespesa({ atualizar }: TabelaProps) {
+export function TabelaDespesa({
+  atualizar,
+  onTotalPagoAtualizado,
+  onTotalNaoPagoAtualizado,
+}: TabelaProps) {
   const [despesas, setDespesas] = useState<Despesa[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -46,6 +51,7 @@ export function TabelaDespesa({ atualizar }: TabelaProps) {
       }));
 
       setDespesas(despesasComPago);
+      atualizarTotais(despesasComPago); // atualiza ambos os totais
     } catch (err) {
       console.error(err);
     } finally {
@@ -62,7 +68,9 @@ export function TabelaDespesa({ atualizar }: TabelaProps) {
     try {
       const res = await fetch(`/api/despesa/${id}`, { method: "DELETE" });
       if (res.ok) {
-        setDespesas((prev) => prev.filter((d) => d.id !== id));
+        const novaLista = despesas.filter((d) => d.id !== id);
+        setDespesas(novaLista);
+        atualizarTotais(novaLista);
       } else {
         alert("Erro ao excluir a despesa.");
       }
@@ -73,26 +81,42 @@ export function TabelaDespesa({ atualizar }: TabelaProps) {
   };
 
   const atualizarDespesaLocal = (novaDespesa: Despesa) => {
-    setDespesas((prev) =>
-      prev.map((d) => (d.id === novaDespesa.id ? novaDespesa : d))
+    const novaLista = despesas.map((d) =>
+      d.id === novaDespesa.id ? novaDespesa : d
     );
+    setDespesas(novaLista);
+    atualizarTotais(novaLista);
   };
 
-  const total = despesas.reduce((acc, d) => {
-    const valor = Number(String(d.valorDespesa).replace(",", ".") || 0);
-    return acc + valor;
-  }, 0);
+  const atualizarTotais = (lista: Despesa[]) => {
+    const totalPago = lista
+      .filter((d) => d.pago)
+      .reduce(
+        (acc, d) => acc + Number(String(d.valorDespesa).replace(",", ".")),
+        0
+      );
+
+    const totalNaoPago = lista
+      .filter((d) => !d.pago)
+      .reduce(
+        (acc, d) => acc + Number(String(d.valorDespesa).replace(",", ".")),
+        0
+      );
+
+    onTotalPagoAtualizado(totalPago);
+    onTotalNaoPagoAtualizado(totalNaoPago);
+  };
 
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="">Descrição</TableHead>
-          <TableHead className="">Categoria</TableHead>
+          <TableHead>Descrição</TableHead>
+          <TableHead>Categoria</TableHead>
           <TableHead className="text-center">Data</TableHead>
           <TableHead className="text-center">Valor</TableHead>
           <TableHead className="text-center">Fixa</TableHead>
-          <TableHead className="">Pago</TableHead>
+          <TableHead className="text-center">Pago</TableHead>
           <TableHead className="text-center">Ações</TableHead>
         </TableRow>
       </TableHeader>
@@ -107,71 +131,61 @@ export function TabelaDespesa({ atualizar }: TabelaProps) {
         ) : (
           despesas.map((d) => (
             <TableRow key={d.id}>
-              <TableCell>{d.descrDespesa}</TableCell>
-              <TableCell>{d.categDespesa}</TableCell>
-              <TableCell className=" text-center">
+              <TableCell className="w-40">{d.descrDespesa}</TableCell>
+              <TableCell className="w-40">{d.categDespesa}</TableCell>
+              <TableCell className="text-center">
                 {new Date(d.dataDespesa).toLocaleDateString("pt-BR")}
               </TableCell>
-              <TableCell className="text-center">
-                R$ {Number(String(d.valorDespesa).replace(",", ".")).toFixed(2)}
+              <TableCell className="text-center w-30">
+                R$ {d.valorDespesa}
               </TableCell>
-              <TableCell className="text-center">{d.despesaFixa ? "Sim" : "Não"}</TableCell>
-              <TableCell>
+              <TableCell className="text-center w-15">
+                {d.despesaFixa ? "Sim" : "Não"}
+              </TableCell>
+              <TableCell className="w-15 text-center">
                 <Checkbox
                   checked={d.pago}
                   onCheckedChange={async (checked) => {
                     try {
                       const res = await fetch(`/api/despesa/${d.id}`, {
                         method: "PATCH",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
+                        headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ pago: checked }),
                       });
                       if (!res.ok) throw new Error("Erro ao atualizar pago");
                       const despesaAtualizada = await res.json();
 
-                      setDespesas((prev) =>
-                        prev.map((item) =>
-                          item.id === despesaAtualizada.id
-                            ? despesaAtualizada
-                            : item
-                        )
+                      const novaLista = despesas.map((item) =>
+                        item.id === despesaAtualizada.id
+                          ? despesaAtualizada
+                          : item
                       );
+                      setDespesas(novaLista);
+                      atualizarTotais(novaLista);
                     } catch (err) {
                       console.error(err);
                       alert("Erro ao marcar como pago");
                     }
                   }}
-                  className="cursor-pointer ml-2"
+                  className="cursor-pointer"
                 />
               </TableCell>
-              <TableCell className="inline-flex">
-                
+              <TableCell className="w-30 text-center">
                 <AlteraDespesa
                   despesa={d}
-                  onDespesaAtualizada={(nova) => atualizarDespesaLocal(nova)}
+                  onDespesaAtualizada={atualizarDespesaLocal}
                 />
                 <Button
-                  className="bg-gray-800 w-18 h-8 hover:bg-red-800 cursor-pointer text-white font-bold"
+                  className="bg-gray-800 w-8 h-8 hover:bg-red-800 cursor-pointer text-white font-bold"
                   onClick={() => excluirDespesa(d.id)}
                 >
-                  Excluir
+                  <Trash />
                 </Button>
               </TableCell>
             </TableRow>
           ))
         )}
       </TableBody>
-
-      <TableFooter>
-        <TableRow>
-          <TableCell className="font-bold">Total</TableCell>
-          <TableCell colSpan={3}></TableCell>
-          <TableCell className="font-bold">R$ {total.toFixed(2)}</TableCell>
-          <TableCell colSpan={2}></TableCell>
-        </TableRow>
-      </TableFooter>
     </Table>
   );
 }

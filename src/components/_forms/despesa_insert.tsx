@@ -6,6 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
+import { BadgePlus } from 'lucide-react';
 import { toast } from "sonner";
 import {
   Select,
@@ -113,8 +114,8 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="cursor-pointer bg-gray-800 hover:bg-green-600 text-white font-bold">
-          Nova
+        <Button className="cursor-pointer w-10 h-9 bg-gray-800 hover:bg-green-600 text-white font-bold">
+          <BadgePlus className=""/>
         </Button>
       </DialogTrigger>
 

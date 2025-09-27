@@ -1,14 +1,13 @@
-// app/api/despesa/[id]/route.ts
+
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-// DELETE despesa
 export async function DELETE(
   req: Request,
-  context: { params: Promise<{ id: string }> } // 👈 params é uma Promise
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await context.params; // 👈 precisa do await
+    const { id } = await context.params;
     const idNumber = Number(id);
 
     await prisma.despesa.delete({
@@ -28,7 +27,6 @@ export async function DELETE(
   }
 }
 
-// PUT (atualiza todos os campos enviados)
 export async function PUT(
   req: Request,
   context: { params: Promise<{ id: string }> }

@@ -28,7 +28,7 @@ model user {
 model despesa {
   id           Int      @id @default(autoincrement())
   descrDespesa String
-  valorDespesa String
+  valorDespesa Decimal  @db.Decimal(10, 2)
   categDespesa String
   dataDespesa  DateTime
   despesaFixa  Boolean  @default(false)

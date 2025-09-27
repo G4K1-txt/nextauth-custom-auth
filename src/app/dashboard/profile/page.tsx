@@ -39,7 +39,7 @@ export default function ProfilePage() {
       </div>
 
       <div className="flex justify-center gap-5">
-        <Card className="w-175 h-auto mx-auto">
+        <Card className="w-150 h-auto mx-auto">
           <CardHeader>
             <CardTitle>
               <div className="flex items-center justify-between flex-wrap gap-2">
@@ -54,7 +54,7 @@ export default function ProfilePage() {
                   )}
                 </div>
               </div>
-              <Separator className="mt-4" />
+              <Separator className="mt-2" />
             </CardTitle>
           </CardHeader>
           <CardContent>

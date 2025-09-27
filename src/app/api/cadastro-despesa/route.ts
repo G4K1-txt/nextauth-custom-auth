@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     await prisma.despesa.create({
       data: {
         descrDespesa,
-        valorDespesa,
+        valorDespesa: valorDespesa.replace(",", "."),
         categDespesa,
         dataDespesa: new Date(dataDespesa),
         despesaFixa,
