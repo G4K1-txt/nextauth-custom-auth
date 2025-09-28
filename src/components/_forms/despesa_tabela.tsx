@@ -108,7 +108,7 @@ export function TabelaDespesa({
   };
 
   return (
-    <Table>
+    <Table className="bg-muted/50 border mt-2">
       <TableHeader>
         <TableRow>
           <TableHead>Descrição</TableHead>

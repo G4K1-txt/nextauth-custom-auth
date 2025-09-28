@@ -8,8 +8,7 @@ import { useSession } from "next-auth/react";
 import { formatCpf, formatContato } from "@/lib/mascaras";
 import { fetchCepData } from "@/lib/buscaCep";
 import { DadosPerfilFormProps, DadosPerfilFormHandle } from "@/types/forms";
-import { toast } from "sonner"
-
+import { toast } from "sonner";
 
 export const DadosPerfilForm = forwardRef<
   DadosPerfilFormHandle,
@@ -96,7 +95,7 @@ export const DadosPerfilForm = forwardRef<
         }
 
         //const updatedUser = await res.json();
-        toast.success('Usuario atualizado com sucesso!')
+        toast.success("Usuario atualizado com sucesso!");
         onSaveSuccess?.();
       } catch (error) {
         toast.error("Erro ao salvar dados do usuário: " + error);
@@ -104,16 +103,15 @@ export const DadosPerfilForm = forwardRef<
       }
     },
   }));
-
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="flex gap-2">
         <div className="">
           <Label htmlFor="email" className="ml-1">
             Email
           </Label>
           <Input
-            className="mt-2"
+            className="mt-2 w-50"
             id="email"
             type="email"
             value={dados.email ?? ""}
@@ -121,12 +119,12 @@ export const DadosPerfilForm = forwardRef<
             disabled={!editando}
           />
         </div>
-        <div className="gap-3">
+        <div className="">
           <Label htmlFor="cpf" className="ml-1">
             CPF
           </Label>
           <Input
-            className="mt-2"
+            className="mt-2 w-31"
             id="cpf"
             type="text"
             value={dados.cpf ?? ""}
@@ -134,18 +132,13 @@ export const DadosPerfilForm = forwardRef<
             disabled={!editando}
           />
         </div>
-      </div>
-
-      <Separator className="mt-3 mb-3" />
-
-      <div className="grid grid-cols-2 gap-6">
-        <div className="gap-3">
+        <div>
           <Label htmlFor="contato" className="ml-1">
             Contato
           </Label>
           <Input
             placeholder="(00) 00000-0000"
-            className="mt-2"
+            className="mt-2 w-33"
             id="contato"
             type="text"
             value={dados.contato ?? ""}
@@ -153,13 +146,18 @@ export const DadosPerfilForm = forwardRef<
             disabled={!editando}
           />
         </div>
-        <div className="gap-3">
+      </div>
+
+      <Separator className="mt-3 mb-3" />
+
+      <div className="flex gap-2">
+        <div className="">
           <Label htmlFor="cep" className="ml-1">
             CEP
           </Label>
           <Input
             placeholder="00000-000"
-            className="mt-2"
+            className="mt-2 w-25"
             id="cep"
             type="text"
             value={dados.cep ?? ""}
@@ -167,32 +165,14 @@ export const DadosPerfilForm = forwardRef<
             disabled={!editando}
           />
         </div>
-      </div>
 
-      <Separator className="mt-3 mb-3" />
-
-      <div className="flex gap-3">
-        <div className="gap-3 ">
-          <Label htmlFor="estado" className="ml-1">
-            UF
-          </Label>
-          <Input
-            placeholder="UF"
-            className="mt-2 w-12"
-            id="estado"
-            type="text"
-            value={dados.estado ?? ""}
-            onChange={handleChange}
-            disabled={!editando}
-          />
-        </div>
         <div className="gap-3">
           <Label htmlFor="cidade" className="ml-1">
             Cidade
           </Label>
           <Input
             placeholder="Cidade"
-            className="mt-2 w-60"
+            className="mt-2 w-77"
             id="cidade"
             type="text"
             value={dados.cidade ?? ""}
@@ -200,13 +180,30 @@ export const DadosPerfilForm = forwardRef<
             disabled={!editando}
           />
         </div>
-        <div className="gap-3">
+        <div className="gap-3 ">
+          <Label htmlFor="estado" className="ml-1">
+            UF
+          </Label>
+          <Input
+            placeholder="UF"
+            className="mt-2 w-14"
+            id="estado"
+            type="text"
+            value={dados.estado ?? ""}
+            onChange={handleChange}
+            disabled={!editando}
+          />
+        </div>
+      </div>
+
+      <div className="flex gap-2 mt-4">
+        <div className="">
           <Label htmlFor="endereco" className="ml-1">
             Endereço
           </Label>
           <Input
             placeholder="Rua/Bairro"
-            className="mt-2 w-60"
+            className="mt-2 w-104"
             id="endereco"
             type="text"
             value={dados.endereco ?? ""}
@@ -216,11 +213,11 @@ export const DadosPerfilForm = forwardRef<
         </div>
         <div className="gap-3">
           <Label htmlFor="numero" className="ml-1">
-            Número
+            Nº
           </Label>
           <Input
-            placeholder="Nº"
-            className="mt-2 w-21"
+            placeholder="0"
+            className="mt-2 w-14"
             id="numero"
             type="text"
             value={dados.numero ?? ""}

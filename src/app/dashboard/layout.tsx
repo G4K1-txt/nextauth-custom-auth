@@ -18,8 +18,8 @@ export default async function DashboardLayout({
   return (
     <div>
       <SidebarProvider>
-        <AppSidebar />
-        <div>
+        <AppSidebar/>
+        <div className="flex">
           <main>{children}</main>
         </div>
       </SidebarProvider>

@@ -8,10 +8,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
-import { LogoutButton } from "@/components/_button/logoutButton"
-import Link from "next/link"
+} from "@/components/ui/sidebar";
+import { Home, Settings } from "lucide-react";
+import { LogoutButton } from "@/components/_button/logoutButton";
+import Link from "next/link";
 
 const items = [
   {
@@ -19,32 +19,18 @@ const items = [
     url: "/dashboard",
     icon: Home,
   },
-  {
-    title: "Inbox",
-    url: "/dashboard/inbox",
-    icon: Inbox,
-  },
-  {
-    title: "Calendar",
-    url: "/dashboard/calendar",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "/dashboard/search",
-    icon: Search,
-  },
+
   {
     title: "Perfil",
     url: "/dashboard/profile",
     icon: Settings,
   },
-]
+];
 
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarContent className="bg-zinc-900">
         <SidebarGroup>
           <SidebarGroupLabel className="p-5">MOEDIN</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -63,9 +49,9 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="bg-zinc-900">
         <LogoutButton />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

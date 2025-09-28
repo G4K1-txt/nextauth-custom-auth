@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <body>
-        <div>
+        <div className="flex">
         <Providers>
            <Toaster position="top-center" richColors expand={false}/>
           {children}

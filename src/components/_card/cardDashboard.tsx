@@ -14,7 +14,7 @@ interface CardDashboardProps {
 
 export function CardDashboard({ totalPago, totalNaoPago }: CardDashboardProps) {
   return (
-    <div className="mt-10 justify-center gap-3 ">
+    <div className=" justify-center gap-3 ">
       <Card className="min-w-[210px] w-auto p-0 h-22 mb-2 bg-muted/50">
         <CardHeader className="p-3">
           <CardDescription className="text-white font-semibold">

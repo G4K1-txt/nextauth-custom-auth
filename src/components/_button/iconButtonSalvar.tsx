@@ -6,9 +6,9 @@ export function ButtonIconSalvar(
 ) {
   return (
     <Button
-      variant="outline"
+
       size="sm"
-      className=" cursor-pointer hover:bg-green-950 text-white"
+      className="cursor-pointer bg-green-900 border  transition-colors duration-600 ease-in-out hover:bg-green-600 text-white"
       {...props}
     >
       <UserRoundCheck />

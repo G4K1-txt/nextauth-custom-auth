@@ -6,9 +6,8 @@ export function ButtonIconEditar(
 ) {
   return (
     <Button
-      variant="outline"
       size="sm"
-      className=" cursor-pointer hover:bg-sky-950 text-white"
+      className="cursor-pointer bg-sky-900 border transition-colors duration-600 ease-in-out hover:bg-sky-600 text-white"
       {...props}
     >
       <UserPen />

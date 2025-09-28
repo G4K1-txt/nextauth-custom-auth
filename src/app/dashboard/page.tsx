@@ -15,13 +15,13 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="mt-4 w-full  ml-4">
+    <div className="mt-4 ml-4">
       <div>
         <Dialog>
           <CadastroDespesa onDespesaCadastrada={triggerAtualizacao} />
         </Dialog>
       </div>
-      <div className="flex gap-4 mt-4">
+      <div className="flex gap-4">
         <div className="">
           <TabelaDespesa
             atualizar={atualizarTabela}
