@@ -6,7 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
-import { BadgePlus } from 'lucide-react';
+import { BadgePlus } from "lucide-react";
 import { toast } from "sonner";
 import {
   Select,
@@ -30,6 +30,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
 type DespesaFixaCheckboxProps = {
   checked: boolean;
   onChange: (val: boolean) => void;
@@ -64,6 +65,7 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
   const [valorDespesa, setValor] = React.useState("");
   const [categDespesa, setCategoria] = React.useState("");
   const [despesaFixa, setDespesaFixa] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,6 +74,7 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
       alert("Preencha todos os campos obrigatórios.");
       return;
     }
+    setLoading(true);
 
     const payload = {
       descrDespesa,
@@ -102,12 +105,13 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
       setCategoria("");
       setDespesaFixa(false);
       setDate(undefined);
-
       onDespesaCadastrada?.();
       setOpen(false);
     } catch (err) {
       console.error(err);
       alert("Erro ao conectar com o servidor.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -115,7 +119,7 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="cursor-pointer w-10 h-9 bg-gray-800 hover:bg-green-600 text-white font-bold">
-          <BadgePlus className=""/>
+          <BadgePlus className="" />
         </Button>
       </DialogTrigger>
 
@@ -187,8 +191,6 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
                 </Select>
               </div>
             </div>
-
-            {/* Data e Checkbox */}
             <div className="columns-2">
               <div className="flex flex-col gap-3 max-w-[150px]">
                 <Label htmlFor="date" className="px-1">
@@ -217,8 +219,6 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
                     />
                   </PopoverContent>
                 </Popover>
-
-                {/* Checkbox separado */}
                 <DespesaFixaCheckbox
                   checked={despesaFixa}
                   onChange={setDespesaFixa}
@@ -229,15 +229,19 @@ export function CadastroDespesa({ onDespesaCadastrada }: CadastroDespesaProps) {
 
           <DialogFooter className="mt-8">
             <DialogClose asChild>
-              <Button className="cursor-pointer hover:bg-red-800 bg-gray-800 text-white">
+              <Button
+                className="cursor-pointer hover:bg-red-800 bg-gray-800 text-white"
+                disabled={loading}
+              >
                 Cancelar
               </Button>
             </DialogClose>
             <Button
               className="cursor-pointer hover:bg-green-600 hover:text-white"
               type="submit"
+              disabled={loading}
             >
-              Salvar
+              {loading ? "Salvando..." : "Salvar"}
             </Button>
           </DialogFooter>
         </form>

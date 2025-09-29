@@ -28,3 +28,19 @@ export function formatContato(value: string): string {
 
   return formatted;
 }
+
+export function formataCartao(value: string): string {
+  // Remove tudo que não for número e limita a 16 dígitos
+  value = value.replace(/\D/g, "").slice(0, 16);
+
+  // Insere espaço a cada 4 dígitos
+  return value.replace(/(\d{4})(?=\d)/g, "$1 ");
+}
+
+export function formataDataCartao(value: string): string {
+  // Remove tudo que não for número e limita a 16 dígitos
+  value = value.replace(/\D/g, "").slice(0, 4);
+
+  // Insere espaço a cada 4 dígitos
+  return value.replace(/(\d{2})(?=\d)/g, "$1/");
+}

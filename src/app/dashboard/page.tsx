@@ -1,5 +1,4 @@
 "use client";
-import { Dialog } from "@/components/ui/dialog";
 import { CadastroDespesa } from "@/components/_forms/despesa_insert";
 import { TabelaDespesa } from "@/components/_forms/despesa_tabela";
 import React, { useState } from "react";
@@ -17,9 +16,7 @@ export default function DashboardPage() {
   return (
     <div className="mt-4 ml-4">
       <div>
-        <Dialog>
-          <CadastroDespesa onDespesaCadastrada={triggerAtualizacao} />
-        </Dialog>
+        <CadastroDespesa onDespesaCadastrada={triggerAtualizacao} />
       </div>
       <div className="flex gap-4">
         <div className="">
