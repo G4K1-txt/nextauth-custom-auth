@@ -26,7 +26,7 @@ export default function DashboardPage() {
             onTotalNaoPagoAtualizado={setTotalNaoPago}
           />
         </div>
-        <div className="flex items-center">
+        <div className="flex mt-2">
           <CardDashboard totalPago={totalPago} totalNaoPago={totalNaoPago} />
         </div>
       </div>

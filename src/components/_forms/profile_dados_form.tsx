@@ -111,7 +111,7 @@ export const DadosPerfilForm = forwardRef<
             Email
           </Label>
           <Input
-            className="mt-2 w-50"
+            className="mt-2 min-[1200px]:w-[250px] min-[1700px]:w-[316px]"
             id="email"
             type="email"
             value={dados.email ?? ""}
@@ -138,7 +138,7 @@ export const DadosPerfilForm = forwardRef<
           </Label>
           <Input
             placeholder="(00) 00000-0000"
-            className="mt-2 w-33"
+            className="mt-2 min-[1700px]:w-[130px]"
             id="contato"
             type="text"
             value={dados.contato ?? ""}
@@ -172,7 +172,7 @@ export const DadosPerfilForm = forwardRef<
           </Label>
           <Input
             placeholder="Cidade"
-            className="mt-2 w-77"
+            className="mt-2 min-[1200px]:w-[344px] min-[1700px]:w-[412px]"
             id="cidade"
             type="text"
             value={dados.cidade ?? ""}
@@ -203,7 +203,7 @@ export const DadosPerfilForm = forwardRef<
           </Label>
           <Input
             placeholder="Rua/Bairro"
-            className="mt-2 w-104"
+            className="mt-2 min-[1200px]:w-[452px] min-[1700px]:w-[520px]"
             id="endereco"
             type="text"
             value={dados.endereco ?? ""}

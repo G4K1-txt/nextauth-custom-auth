@@ -51,7 +51,7 @@ export function TabelaDespesa({
       }));
 
       setDespesas(despesasComPago);
-      atualizarTotais(despesasComPago); // atualiza ambos os totais
+      atualizarTotais(despesasComPago); 
     } catch (err) {
       console.error(err);
     } finally {
@@ -131,18 +131,16 @@ export function TabelaDespesa({
         ) : (
           despesas.map((d) => (
             <TableRow key={d.id}>
-              <TableCell className="w-40">{d.descrDespesa}</TableCell>
-              <TableCell className="w-40">{d.categDespesa}</TableCell>
+              <TableCell>{d.descrDespesa}</TableCell>
+              <TableCell>{d.categDespesa}</TableCell>
               <TableCell className="text-center">
                 {new Date(d.dataDespesa).toLocaleDateString("pt-BR")}
               </TableCell>
-              <TableCell className="text-center w-30">
-                R$ {d.valorDespesa}
-              </TableCell>
-              <TableCell className="text-center w-15">
+              <TableCell className="text-center">R$ {d.valorDespesa}</TableCell>
+              <TableCell className="text-center">
                 {d.despesaFixa ? "Sim" : "Não"}
               </TableCell>
-              <TableCell className="w-15 text-center">
+              <TableCell className="text-center">
                 <Checkbox
                   checked={d.pago}
                   onCheckedChange={async (checked) => {
@@ -170,7 +168,7 @@ export function TabelaDespesa({
                   className="cursor-pointer"
                 />
               </TableCell>
-              <TableCell className="w-30 text-center">
+              <TableCell className="text-center">
                 <AlteraDespesa
                   despesa={d}
                   onDespesaAtualizada={atualizarDespesaLocal}

@@ -38,7 +38,7 @@ export default function ProfilePage() {
         <h4 className="scroll-m-20 ml-6 mb-2 text-xl font-semibold tracking-tight">
           Gerencie suas informações pessoais e de contato.
         </h4>
-        <div className="bg-muted/50 w-130 p-4 ml-4 rounded-2xl border">
+        <div className="bg-muted/50 p-4 ml-4 rounded-2xl border min-[1200px]:w-[550px] min-[1200px]:h-[310px] min-[1700px]:w-[620px] min-[1700px]:h-[310px] ">
           <div className="flex justify-between ml-1 mb-4">
             <h3 className="sm:text-2xl font-semibold">{session.user?.name}</h3>
             <div>
@@ -58,8 +58,8 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
-      <div className="mt-23">
-        <div className="bg-muted/50 w-130 ml-4 rounded-2xl border">
+      <div className="mt-23 flex">
+        <div className="bg-muted/50 min-[1200px]:w-[500px] min-[1200px]:h-[310px] min-[1700px]:w-[620px] min-[1700px]:h-[310px] ml-4 rounded-2xl border">
           <DadosCartoesPerfilForm />
         </div>
       </div>

@@ -1,7 +1,5 @@
 {
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/api/cadastro-despesa/route": "app/api/cadastro-despesa/route.js",
-  "/api/despesa/[id]/route": "app/api/despesa/[id]/route.js",
   "/api/despesa/route": "app/api/despesa/route.js",
   "/api/user/[id]/route": "app/api/user/[id]/route.js",
   "/dashboard/page": "app/dashboard/page.js",
